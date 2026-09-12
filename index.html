@@ -1,1 +1,162 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>До літа 2027 ☀️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  background: linear-gradient(135deg, #141e30, #243b55);
+}
+
+.container {
+  width: 92%;
+  max-width: 700px;
+  padding: 35px 20px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+}
+
+h1 {
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #cbd5e1;
+  margin-bottom: 30px;
+}
+
+.timer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.box {
+  padding: 20px 10px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.12);
+}
+
+.number {
+  font-size: 38px;
+  font-weight: bold;
+  color: #7dd3fc;
+}
+
+.label {
+  margin-top: 8px;
+  color: #dbeafe;
+}
+
+.milliseconds {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.12);
+}
+
+.ms-number {
+  font-size: 42px;
+  font-weight: bold;
+  color: #facc15;
+}
+
+footer {
+  margin-top: 25px;
+  color: #cbd5e1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>☀️ До літа 2027</h1>
+  <div class="subtitle">Скільки залишилося до 1 червня?</div>
+
+  <div class="timer">
+    <div class="box">
+      <div class="number" id="days">0</div>
+      <div class="label">Днів</div>
+    </div>
+
+    <div class="box">
+      <div class="number" id="hours">0</div>
+      <div class="label">Годин</div>
+    </div>
+
+    <div class="box">
+      <div class="number" id="minutes">0</div>
+      <div class="label">Хвилин</div>
+    </div>
+
+    <div class="box">
+      <div class="number" id="seconds">0</div>
+      <div class="label">Секунд</div>
+    </div>
+  </div>
+
+  <div class="milliseconds">
+    <div class="ms-number" id="milliseconds">000</div>
+    <div class="label">Мілісекунд</div>
+  </div>
+
+  <footer>🌴 Літо вже близько!</footer>
+</div>
+
+<script>
+const targetDate = new Date("2027-06-01T00:00:00").getTime();
+
+function updateTimer() {
+  const now = Date.now();
+  let difference = targetDate - now;
+
+  if (difference <= 0) {
+    document.querySelector(".container").innerHTML =
+      "<h1>☀️ Літо настало!</h1>";
+    return;
+  }
+
+  const days = Math.floor(difference / 86400000);
+  difference %= 86400000;
+
+  const hours = Math.floor(difference / 3600000);
+  difference %= 3600000;
+
+  const minutes = Math.floor(difference / 60000);
+  difference %= 60000;
+
+  const seconds = Math.floor(difference / 1000);
+  const milliseconds = difference % 1000;
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+  document.getElementById("milliseconds").textContent =
+    String(milliseconds).padStart(3, "0");
+}
+
+setInterval(updateTimer, 10);
+updateTimer();
+</script>
+
+</body>
+</html>
 
